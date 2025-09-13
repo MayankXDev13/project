@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMI Calculator</title>
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+  <body class="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
+    <div class="w-full max-w-md bg-gray-800 p-6 rounded-lg shadow-2xl border border-gray-600">
+      <h2 class="text-3xl font-bold text-center text-blue-400 mb-4">
+        Loan EMI Calculator
+      </h2>
+
+      <div class="mb-4">
+        <label class="block text-blue-300 text-sm font-bold mb-2">
+          Loan Amount (₹):
+        </label>
+        <input type="number" id="loanAmount" class="w-full p-3 bg-gray-700 focus:outline-none text-center text-white font-bold rounded-md" />
+        <input type="range" id="loanAmountSlider" min="1000" max="1000000" step="1000" class="w-full mt-2 accent-blue-400" />
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-blue-300 text-sm font-bold mb-2">
+          Annual Interest Rate (%):
+        </label>
+        <input type="number" id="interestRate" class="w-full p-3 bg-gray-700 focus:outline-none text-center text-white font-bold rounded-md" />
+        <input type="range" id="interestRateSlider" min="1" max="20" step="0.1" class="w-full mt-2 accent-blue-400" />
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-blue-300 text-sm font-bold mb-2">
+          Loan Tenure (Years):
+        </label>
+        <input type="number" id="loanTenure" class="w-full p-3 bg-gray-700 focus:outline-none text-center text-white font-bold rounded-md" />
+        <input type="range" id="loanTenureSlider" min="1" max="30" step="1" class="w-full mt-2 accent-blue-400" />
+      </div>
+
+      <div class="mt-4 text-center">
+        <p class="text-lg font-semibold">Monthly EMI: <span id="emiResult" class="text-green-400">₹0</span></p>
+        <p class="text-lg font-semibold">Principal Amount: <span id="principalAmount" class="text-green-400">₹0</span></p>
+        <p class="text-lg font-semibold">Total Interest: <span id="totalInterest" class="text-green-400">₹0</span></p>
+        <p class="text-lg font-semibold">Total Amount: <span id="totalAmount" class="text-green-400">₹0</span></p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
