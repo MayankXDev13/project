@@ -43,7 +43,7 @@ WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/package.json ./
 COPY --from=build /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/.next ./.next
-
+COPY --from=build /usr/src/app/public ./public
 
 
 EXPOSE 3000
