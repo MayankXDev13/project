@@ -25,4 +25,7 @@ jobs:
           context: note_app
           file: note_app/Dockerfile
           push: true
+          build-args: |
+            NODE_ENV=production
+            MONGODB_URI=${{ secrets.MONGODB_URI }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/note-app:latest
