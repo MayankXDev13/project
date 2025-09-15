@@ -1,7 +1,13 @@
 version: "3.9"
+
 services:
   note-app:
-    image: mayankxdev/note-app
-    env_file: .env
+    image: mayankxdev/note-app:latest
+    container_name: note-app
+    restart: unless-stopped
     ports:
-      - 3000:3000
+      - "3000:3000"
+    # env_file: .env
+    environment:
+      - MONGODB_URI=mongodb+srv://Mayank:CjKpQIG81TAmLeqU@cluster0.ewrit6g.mongodb.net/note-app
+   
