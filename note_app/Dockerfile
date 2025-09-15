@@ -37,6 +37,9 @@ ENV MONGODB_URI='mongodb://localhost:27017/dummy'
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Ensure public directory exists in build stage
+RUN mkdir -p /usr/src/app/public
+
 RUN pnpm run build
 
 # Final Stage
