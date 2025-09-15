@@ -38,6 +38,7 @@ RUN pnpm build
 
 FROM node:${NODE_VERSION}-alpine AS prod
 WORKDIR /usr/src/app
+RUN npm install -g pnpm@10.15.1
 
 
 COPY --from=build /usr/src/app/package.json ./
