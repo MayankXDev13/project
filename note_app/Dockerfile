@@ -35,6 +35,10 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 COPY . .
 
+ARG MONGODB_URI
+ENV MONGODB_URI=${MONGODB_URI}
+
+
 RUN pnpm run build
 
 # Final Stage
