@@ -33,7 +33,8 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY . .
 
 # Build-time environment variables
-ENV MONGODB_URI='mongodb://localhost:27017/dummy'
+ARG MONGODB_URI_BUILD='mongodb://localhost:27017/dummy'
+ENV MONGODB_URI=${MONGODB_URI_BUILD}
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
