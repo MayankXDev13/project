@@ -1,6 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 
 interface Note {
