@@ -27,8 +27,8 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 COPY . .
 
-# ⚠️ Removed ARG/ENV MONGODB_URI
-# Build without DB secrets
+ENV MONGODB_URI='mongodb://localhost:27017/dummy'
+
 RUN pnpm run build
 
 # Final Stage
@@ -44,5 +44,4 @@ COPY --from=build /usr/src/app/.next/ ./.next/
 
 EXPOSE 3000
 
-# MONGODB_URI will be injected at runtime (not build)
 CMD ["pnpm", "start"]
