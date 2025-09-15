@@ -1,0 +1,10 @@
+
+services:
+  server:
+    image: note-app
+    container_name: note-app-container
+    ports:
+      - 3000:3000
+
+
+

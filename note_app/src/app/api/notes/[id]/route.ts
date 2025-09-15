@@ -3,12 +3,13 @@ import { connectDB } from "@/lib/db";
 import Notes from "../../model/notes";
 
 // get a single note GET /api/notes/:id
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   await connectDB();
-  const { id } = params;
+  const { id } = await params;
 
   const note = await Notes.findById(id);
 
@@ -28,11 +29,11 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   await connectDB();
 
-  const { id } = params;
+  const { id } = await params;
 
   const { title, content } = await req.json();
 
@@ -56,22 +57,20 @@ export async function PUT(
   });
 }
 
-
-
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    await connectDB(); // ✅ connect to MongoDB
+    await connectDB();
 
-    const { id } =  await params;
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json({ message: "id is required" }, { status: 400 });
     }
 
-    const deleteNote = await Notes.findByIdAndDelete(id); // ✅ simpler than findOneAndDelete({ _id: id })
+    const deleteNote = await Notes.findByIdAndDelete(id);
 
     if (!deleteNote) {
       return NextResponse.json({ message: "Note not found" }, { status: 404 });

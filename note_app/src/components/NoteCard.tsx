@@ -1,7 +1,9 @@
+"use client";
+
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 interface Note {
   _id: string;
@@ -13,7 +15,7 @@ interface Note {
 
 export default function NoteCard() {
   const [notes, setNotes] = useState<Note[]>([]);
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -28,25 +30,25 @@ export default function NoteCard() {
     fetchNotes();
   }, []);
 
-const handleNoteDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
-  try {
-    const id = e.currentTarget.id; 
+  const handleNoteDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      const id = e.currentTarget.id;
 
-    if (!id) {
-      console.warn("No id found on button");
-      return;
+      if (!id) {
+        console.warn("No id found on button");
+        return;
+      }
+
+      const response = await axios.delete(`/api/notes/${id}`);
+
+      if (response.data) {
+        router.refresh();
+      }
+      console.log("Deleted:", response.data);
+    } catch (error) {
+      console.error("Error deleting note:", error);
     }
-
-    const response = await axios.delete(`/api/notes/${id}`);
-
-    if (response.data) {
-      router.refresh()
-    }
-    console.log("Deleted:", response.data);
-  } catch (error) {
-    console.error("Error deleting note:", error);
-  }
-};
+  };
 
   return (
     <div className="mb-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

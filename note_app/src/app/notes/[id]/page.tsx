@@ -9,7 +9,7 @@ interface PageProps {
 }
 
 export default function Page({ params }: PageProps) {
-  const { id } = use(params); // ✅ unwrap params with React.use()
+  const { id } = use(params); 
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
