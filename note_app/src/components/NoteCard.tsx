@@ -41,9 +41,8 @@ export default function NoteCard() {
 
       const response = await axios.delete(`/api/notes/${id}`);
 
-      if (response.data) {
-        router.refresh();
-      }
+      router.refresh();
+
       console.log("Deleted:", response.data);
     } catch (error) {
       console.error("Error deleting note:", error);

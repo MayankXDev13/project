@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 interface NoteProps {
   title?: string;
@@ -18,6 +19,8 @@ export default function Note({
 }: NoteProps) {
   const [title, setTitle] = useState(initialTitle);
   const [content, setContent] = useState(initialContent);
+
+  const router = useRouter();
 
   console.log(title, content, page, id);
 
@@ -41,11 +44,13 @@ export default function Note({
         title,
         content,
       });
-
+      
       console.log("Note submitted:", response.data);
 
+      
       setTitle("");
       setContent("");
+      router.push("/notes")      
     } catch (error) {
       console.error("Error creating note:", error);
     }
