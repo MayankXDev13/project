@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface NoteProps {
   title?: string;
@@ -79,6 +79,8 @@ export default function Note({
         title,
         content,
       });
+      router.push("/notes")     
+
       console.log("Note updated:", response.data);
     } catch (error) {
       console.error("Error updating note:", error);

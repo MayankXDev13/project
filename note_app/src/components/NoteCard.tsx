@@ -17,33 +17,23 @@ export default function NoteCard() {
   const [notes, setNotes] = useState<Note[]>([]);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const response = await axios.get("/api/notes");
-        setNotes(response.data.notes);
-      } catch (error) {
-        console.error("Error fetching notes:", error);
-      }
-    };
+  const fetchNotes = async () => {
+    try {
+      const response = await axios.get("/api/notes");
+      setNotes(response.data.notes);
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchNotes();
   }, []);
 
-  const handleNoteDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const deleteNote = async (id: string) => {
     try {
-      const id = e.currentTarget.id;
-
-      if (!id) {
-        console.warn("No id found on button");
-        return;
-      }
-
-      const response = await axios.delete(`/api/notes/${id}`);
-
-      router.refresh();
-
-      console.log("Deleted:", response.data);
+      await axios.delete(`/api/notes/${id}`);
+      fetchNotes(); 
     } catch (error) {
       console.error("Error deleting note:", error);
     }
@@ -76,7 +66,7 @@ export default function NoteCard() {
             <button
               id={`${note._id}`}
               className="rounded-xl bg-red-500 px-4 py-1.5 text-sm text-white transition duration-200 hover:bg-red-600"
-              onClick={handleNoteDelete}
+              onClick={() => deleteNote(note._id)}
             >
               Delete
             </button>
